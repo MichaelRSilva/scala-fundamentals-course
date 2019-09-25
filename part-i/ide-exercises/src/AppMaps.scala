@@ -27,8 +27,7 @@ object AppMaps extends App {
 
 
   // Criação e inicialização de map immutable
-  val immutableMap: Map[Int, String] = HashMap(1 -> "One", 2 -> "Two")
-  immutableMap.keys.foreach(k => println("Key: " + k + " Value: " + mutableMap(k)))
-
+  val immutableMap: Map[Int, String] = Map(1 -> "One", 2 -> "Two")
+  immutableMap.keys .foreach(k => println("Key: " + k + " Value: " + immutableMap(k)))
 
 }

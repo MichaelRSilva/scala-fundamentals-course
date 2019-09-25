@@ -28,36 +28,43 @@ object AppLists extends App {
   //println(listPrepend.head)
 
   // Último elemento
-  println(listPrepend.last)
+  //println(listPrepend.last)
+
+  val x = List("a", "b", "b")
+
+  x.filter(a -> a.equals("a"))
 
 
-  // [ EXERCÍCIO {1} ] Crie um objeto que inicialize 3 listas. Utilize pelo menos 10 métodos nas listas criadas.
+  println(x.lastIndexWhere(a => a.equals("b")))
 
-  // [ EXERCÍCIO {2} ] Implemente as seguintes funções:
 
-  // Retorna uma lista sem o item a ser removido
-  def removeItem(list: List[String], toRemove: String): List[String] = {
-    null
-  }
-
-  // Retorna uma item com todos os items que nao estao na intercessão de A com B
-  def differenceBetween(listA: List[String], listB: List[String]): List[String] = {
-    null
-  }
-
-  // Retorna o maior numero da lista
-  def max(list: List[Int]): Int = {
-    null
-  }
-
-  // Retorna o menor numero da lista
-  def min(list: List[Int]): Int = {
-    null
-  }
-
-  // Retornar a media da lista
-  def mean(list: List[Int]): Int = {
-    null
-  }
+//  // [ EXERCÍCIO {1} ] Crie um objeto que inicialize 3 listas. Utilize pelo menos 10 métodos nas listas criadas.
+//
+//  // [ EXERCÍCIO {2} ] Implemente as seguintes funções:
+//
+//  // Retorna uma lista sem o item a ser removido
+//  def removeItem(list: List[String], toRemove: String): List[String] = {
+//    null
+//  }
+//
+//  // Retorna uma item com todos os items que nao estao na intercessão de A com B
+//  def differenceBetween(listA: List[String], listB: List[String]): List[String] = {
+//    null
+//  }
+//
+//  // Retorna o maior numero da lista
+//  def max(list: List[Int]): Int = {
+//    null
+//  }
+//
+//  // Retorna o menor numero da lista
+//  def min(list: List[Int]): Int = {
+//    null
+//  }
+//
+//  // Retornar a media da lista
+//  def mean(list: List[Int]): Int = {
+//    null
+//  }
 
 }

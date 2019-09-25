@@ -22,17 +22,17 @@ object AppSets extends App {
   mutableSet.add(1)
   mutableSet.remove(2)
 
-  mutableSet.foreach(println)
+  ///mutableSet.foreach(println)
 
 
 
   // Criação e inicialização de conjuntos immutable
-  val immutableSet: Set[Int] = HashSet(5,6,7)
+  //val immutableSet: Set[Int] = HashSet(5,6,7)
 
   //immutableSet.add(1)
   //immutableSet.remove(2)
 
-  immutableSet.foreach(println)
+  //immutableSet.foreach(println)
 
 
 }

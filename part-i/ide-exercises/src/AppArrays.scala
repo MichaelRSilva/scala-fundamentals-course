@@ -1,4 +1,5 @@
 
+
 /**
   * Execicios a serem executados via utilizando a IDE.
   * Tratamento de Arrays
@@ -18,6 +19,7 @@ object AppArrays extends App {
   arr(1) = ", "
   arr(2) = "world!\n"
 
+
   //ArrayIndexOutOfBoundsException
   //arr(3) = "!!!!\n"
 
@@ -35,5 +37,7 @@ object AppArrays extends App {
   // Criação e inicialização
   //val names = Array("zero", "one", "two")
   //for (i <- 0 to 2) print(names(i))
+
+
 
 }

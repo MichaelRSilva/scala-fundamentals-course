@@ -11,11 +11,11 @@
 object AppTuple extends App {
 
   // Criação e inicialização das tupls
-  val pair = (99, "Luftballons")
+  val pair = (99, "Leandro", 11)
 
   // Acessando os valores da tupla
   println(pair._1)
   println(pair._2)
-
+  println(pair._3)
 
 }
