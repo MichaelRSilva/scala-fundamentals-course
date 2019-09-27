@@ -7,10 +7,9 @@ import akka.http.scaladsl.model.StatusCodes
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server._
 import StatusCodes._
-
-import io.michael.messages.TeamMessages.{GetTeam, GetTeams, Team, Teams}
+import io.michael.messages.TeamMessages._
 import io.michael.actors.TeamActor
-import io.michael.messages.EventMarshaller
+import io.michael.messages.{ErrorResponse, Marshaller, Response}
 
 import scala.concurrent.{ExecutionContext, ExecutionContextExecutor, Future}
 
@@ -22,7 +21,7 @@ class Api(system: ActorSystem, timeout: Timeout) extends RestRoutes {
 }
 
 
-trait RestRoutes extends TeamApi with EventMarshaller {
+trait RestRoutes extends TeamApi with Marshaller {
 
   val service = "api"
   val version = "v1"
@@ -32,8 +31,9 @@ trait RestRoutes extends TeamApi with EventMarshaller {
       get {
         // GET api/v1/teams
         pathEndOrSingleSlash {
-          onSuccess(getTeams) { teams =>
-            complete(OK, teams)
+          onSuccess(getTeams) {
+            case error: ErrorResponse => complete(error.code, error.message)
+            case teams: Teams => complete(OK, teams)
           }
         }
       }
@@ -66,7 +66,7 @@ trait TeamApi {
 
   lazy val teamActor: ActorRef = createTeamActor()
 
-  def getTeams: Future[Teams] = teamActor.ask(GetTeams).mapTo[Teams]
+  def getTeams: Future[Response] = teamActor.ask(GetTeams).mapTo[Response]
 
   def getTeam(team: String): Future[Option[Team]] = teamActor.ask(GetTeam(team)).mapTo[Option[Team]]
 

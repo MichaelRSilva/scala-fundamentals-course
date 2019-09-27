@@ -9,8 +9,13 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
 import akka.stream.ActorMaterializer
 import akka.util.Timeout
+import io.michael.messages.TeamMessages.Team
+import org.mongodb.scala._
+import org.mongodb.scala.bson.codecs.{DEFAULT_CODEC_REGISTRY, Macros}
+import org.bson.codecs.configuration.CodecRegistries.{fromProviders, fromRegistries}
 import io.michael.routes.Api
 import io.michael.util.ConfigUtil
+import org.mongodb.scala.MongoClient
 
 import scala.concurrent.duration._
 import scala.util.{Failure, Success, Try}
@@ -26,24 +31,21 @@ object Main extends App with RequestTimeout {
 
   val log = Logging(system.eventStream, "api")
 
-  (ConfigUtil.getHttpServerHost, Some(9090)) match {
-    case(Some(host), Some(port)) =>
 
-      val bindingFuture: Future[ServerBinding] = Http().bindAndHandle(api, "0.0.0.0", port)
+  (ConfigUtil.getHttpServerHost, ConfigUtil.getHttpServerPort) match {
+    case (Some(host), Some(port)) =>
+
+      val bindingFuture: Future[ServerBinding] = Http().bindAndHandle(api, host, port)
 
       Try {
-
         bindingFuture.map { serverBinding =>
           log.info(s"Api bound to ${serverBinding.localAddress}")
         }
 
-      } match {
-        case Success(_) => log.info(s"The server is up.")
-        case Failure(ex) =>
-          log.error(ex, s"Failed to bind to $host:$port !")
-          system.terminate()
       }
+    case _ => Failure(new IllegalArgumentException("The HTTP para config is wrong."))
   }
+
 }
 
 trait RequestTimeout {

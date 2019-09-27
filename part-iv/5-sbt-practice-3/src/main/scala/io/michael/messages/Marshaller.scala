@@ -4,9 +4,9 @@ import play.api.libs.json._
 import de.heikoseeberger.akkahttpplayjson._
 import io.michael.messages.TeamMessages.{Team, Teams}
 
-case class Error(code: Int, message: String)
+case class Error(message: String)
 
-trait EventMarshaller extends PlayJsonSupport {
+trait Marshaller extends PlayJsonSupport {
 
   implicit val errorFormat: OFormat[Error] = Json.format[Error]
   implicit val teamFormat: OFormat[Team]   = Json.format[Team]
