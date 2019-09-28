@@ -19,6 +19,8 @@ libraryDependencies ++= {
     "ch.qos.logback"    %  "logback-classic" % "1.2.3",
     "de.heikoseeberger" %% "akka-http-play-json"   % "1.29.1",
     "com.typesafe.akka" %% "akka-testkit"    % akkaVersion   % "test",
-    "org.scalatest"     %% "scalatest"       % "3.2.0-M1"       % "test"
+    "org.scalatest"     %% "scalatest"       % "3.2.0-M1"       % "test",
+    "org.mongodb.scala" %% "mongo-scala-driver" % "2.7.0"
+
   )
 }

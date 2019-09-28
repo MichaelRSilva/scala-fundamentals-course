@@ -4,9 +4,13 @@ object TeamMessages {
 
   case class GetTeam(name: String)
   case class GetTeams()
+  case class InsertTeam(team: Team)
 
-  case class Team(name: String, city: String)
-  case class Teams(list: List[Team])
+
+  sealed trait TeamResponse extends Response
+
+  case class Team(name: String, city: String) extends TeamResponse
+  case class Teams(list: List[Team]) extends TeamResponse
 
 
 }
