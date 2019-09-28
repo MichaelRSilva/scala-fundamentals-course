@@ -25,7 +25,7 @@ object MongoWrapper {
     case None => Failure(new IllegalArgumentException("The MongoDB connection config is wrong."))
   }
 
-  def getTeamCollection: Option[MongoCollection[Team]] = {
+  val teamCollection: Option[MongoCollection[Team]] = {
 
     client match {
 

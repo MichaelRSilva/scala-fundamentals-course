@@ -3,10 +3,10 @@ package io.michael.actors
 import akka.actor.{Actor, Props}
 import akka.http.scaladsl.model.StatusCodes
 import io.michael.messages.{ErrorResponse, TeamMessages}
-import io.michael.messages.TeamMessages.GetTeams
+import io.michael.messages.TeamMessages.{GetTeams, Team}
 import io.michael.wrappers.MongoWrapper
-import scala.concurrent.ExecutionContext.Implicits.global
 
+import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
 
 object TeamActor {
@@ -19,17 +19,17 @@ class TeamActor extends Actor {
 
     case GetTeams => {
 
-      MongoWrapper.getTeamCollection match {
+      val actorToReturn = sender()
+
+      MongoWrapper.teamCollection match {
         case Some(collection) =>
           collection.find().toFuture() onComplete  {
-            case Success(teams) =>
+            case Success(teams) => actorToReturn ! TeamMessages.Teams(teams.toList)
 
-              sender() ! TeamMessages.Teams(teams.toList)
-
-            case Failure(_) => sender() ! ErrorResponse(StatusCodes.InternalServerError, "An internal error has occurred. Contact the system administrator.")
+            case Failure(_) => actorToReturn ! ErrorResponse(StatusCodes.InternalServerError, "An internal error has occurred. Contact the system administrator.")
 
           }
-        case None => sender() ! ErrorResponse(StatusCodes.InternalServerError, "An internal error has occurred. Contact the system administrator.")
+        case None => actorToReturn ! ErrorResponse(StatusCodes.InternalServerError, "An internal error has occurred. Contact the system administrator.")
       }
     }
   }
