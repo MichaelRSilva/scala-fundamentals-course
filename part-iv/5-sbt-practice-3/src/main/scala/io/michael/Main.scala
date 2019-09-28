@@ -9,13 +9,8 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
 import akka.stream.ActorMaterializer
 import akka.util.Timeout
-import io.michael.messages.TeamMessages.Team
-import org.mongodb.scala._
-import org.mongodb.scala.bson.codecs.{DEFAULT_CODEC_REGISTRY, Macros}
-import org.bson.codecs.configuration.CodecRegistries.{fromProviders, fromRegistries}
 import io.michael.routes.Api
 import io.michael.util.ConfigUtil
-import org.mongodb.scala.MongoClient
 
 import scala.concurrent.duration._
 import scala.util.{Failure, Success, Try}
@@ -43,7 +38,7 @@ object Main extends App with RequestTimeout {
         }
 
       }
-    case _ => Failure(new IllegalArgumentException("The HTTP para config is wrong."))
+    case _ => Failure(new IllegalArgumentException("The HTTP config is wrong."))
   }
 
 }
@@ -62,3 +57,10 @@ trait RequestTimeout {
   }
 }
 
+
+// DESAFIO
+// Finalizar o servidor REST. Implementar as seguintes funcionalidades
+//  1) Metodo para adicionar um novo time no MongoDB
+//  2) Método para recuperar um time pelo nome
+//  3) Método para deletar um time
+//  4) Método para atualizar um time

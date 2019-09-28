@@ -4,6 +4,7 @@ object TeamMessages {
 
   case class GetTeam(name: String)
   case class GetTeams()
+  case class InsertTeam(team: Team)
 
 
   sealed trait TeamResponse extends Response
